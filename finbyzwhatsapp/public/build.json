@@ -1,0 +1,5 @@
+{
+	"js/finbyzwhatsapp.min.js": [
+		"public/js/whatsapp_manager.js"
+    ]
+}
