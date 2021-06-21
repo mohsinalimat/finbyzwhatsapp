@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include finbyzwhatsapp *.css
+recursive-include finbyzwhatsapp *.csv
+recursive-include finbyzwhatsapp *.html
+recursive-include finbyzwhatsapp *.ico
+recursive-include finbyzwhatsapp *.js
+recursive-include finbyzwhatsapp *.json
+recursive-include finbyzwhatsapp *.md
+recursive-include finbyzwhatsapp *.png
+recursive-include finbyzwhatsapp *.py
+recursive-include finbyzwhatsapp *.svg
+recursive-include finbyzwhatsapp *.txt
+recursive-exclude finbyzwhatsapp *.pyc
