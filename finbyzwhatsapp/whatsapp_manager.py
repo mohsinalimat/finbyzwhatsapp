@@ -245,7 +245,7 @@ def get_pdf_whatsapp(doctype,name,attach_document_print,print_format,selected_at
 	# elif login_or_not == False:
 	# 	return False
 	# background_msg_whatsapp(driver,qr_hash,doctype,name,attach_document_print,print_format,selected_attachments,mobile_number,description)
-	enqueue(background_msg_whatsapp,queue= "default", timeout= 1800, job_name= 'Whatsapp Message', doctype= doctype, name= name, attach_document_print=attach_document_print,print_format= print_format,selected_attachments=selected_attachments,mobile_number=mobile_number,description=description)
+	enqueue(background_msg_whatsapp,queue= "long", timeout= 1800, job_name= 'Whatsapp Message', doctype= doctype, name= name, attach_document_print=attach_document_print,print_format= print_format,selected_attachments=selected_attachments,mobile_number=mobile_number,description=description)
 
 def background_msg_whatsapp(doctype,name,attach_document_print,print_format,selected_attachments,mobile_number,description):
 	if attach_document_print==1:
