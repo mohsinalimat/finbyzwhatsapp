@@ -275,7 +275,8 @@ def background_msg_whatsapp(doctype,name,attach_document_print,print_format,sele
 
 	if not send_msg == False:
 		comment_whatsapp = frappe.new_doc("Comment")
-		comment_whatsapp.comment_type = "WhatsApp"
+		comment_whatsapp.comment_type = "Info"
+		comment_whatsapp.subject = "Whatsapp"
 		comment_whatsapp.comment_email = frappe.session.user
 		comment_whatsapp.reference_doctype = doctype
 		comment_whatsapp.reference_name = name
@@ -314,7 +315,7 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 	loggedin = False
 
 	try:
-		WebDriverWait(driver, 300).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.two' + ',' + 'canvas')))
+		WebDriverWait(driver, 480).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.two' + ',' + 'canvas')))
 	except:
 		ss_name_first =  'whatsapp error ' + frappe.session.user + 'first' +  frappe.generate_hash(length=5) +'.png'
 		# f_first = save_file(ss_name_first, '', '','')
@@ -553,7 +554,8 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 				attach=driver.find_element_by_css_selector('input[type="file"]')
 				attach.send_keys(path_url)
 				try:
-					WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div')))
+					WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '._33pCO')))
+					# WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div')))
 				except:
 					ss_name_eight =  'whatsapp error ' + frappe.session.user + 'eight' + frappe.generate_hash(length=5) +  '.png'
 					# f_eight = save_file(ss_name_eight, '', '','')
@@ -569,8 +571,9 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 					driver.quit()
 					return False
 
-				whatsapp_send_button = driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div')
-				whatsapp_send_button.click()
+				driver.find_element_by_css_selector('._33pCO').click()
+				# whatsapp_send_button = driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div')
+				# whatsapp_send_button.click()
 	
 		except:
 			frappe.log_error(frappe.get_traceback(),"Error while trying to send the whatsapp message.")

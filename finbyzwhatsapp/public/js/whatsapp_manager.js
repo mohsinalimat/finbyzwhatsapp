@@ -114,7 +114,7 @@ function whatsapp_dialog(frm){
                         print_format:v.select_print_format,
                         selected_attachments:selected_attachments,
                         mobile_number:v.number,
-                        description:v.content || ''
+                        description:String(v.content) || ''
                     },
                     // freeze:true,
                     // freeze_message:__("<b><p style='font-size:35px'>Please Wait, File Sending is in Progress!!</p></b>"),
