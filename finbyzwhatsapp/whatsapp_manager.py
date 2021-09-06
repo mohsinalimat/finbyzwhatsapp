@@ -589,10 +589,9 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 					return False
 
 				try:
+					WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '._33pCO')))
 					WebDriverWait(driver,60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '._33pCO')))
-					click_element_file = driver.find_element_by_css_selector('._33pCO')
-					driver.execute_script("arguments[0].click();", click_element_file)
-					# WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '._33pCO')))
+					driver.find_element_by_css_selector('._33pCO').click()
 					# WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div')))
 				except:
 					ss_name_eight =  'whatsapp error ' + frappe.session.user + 'eight' + frappe.generate_hash(length=5) +  '.png'
