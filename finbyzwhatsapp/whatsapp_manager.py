@@ -489,7 +489,7 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 
 	if description:
 		try:
-			WebDriverWait(driver, 120).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '._1LbR4')))
+			WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '._1LbR4')))
 		except:
 			ss_name_sixth_1 = 'whatsapp error ' + frappe.session.user + 'sixth 1' + frappe.generate_hash(length=5) +  '.png'
 			# f_sixth_1 = save_file(ss_name_sixth_1, '', '','')
@@ -508,7 +508,7 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 		try:
 			input_box = driver.find_element_by_css_selector('._1LbR4')
 			input_box.send_keys(description)
-			driver.find_element_by_css_selector('._1Ae7k').click()
+
 		except:
 			ss_name_sixth =  'whatsapp error ' + frappe.session.user + 'sixth' + frappe.generate_hash(length=5) +  '.png'
 			# f_sixth = save_file(ss_name_sixth, '', '','')
@@ -523,6 +523,28 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 			frappe.db.commit()
 			driver.quit()
 			return False
+
+
+		try:
+			WebDriverWait(driver,60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '._4sWnG')))
+			click_element = driver.find_element_by_css_selector('._4sWnG')
+			driver.execute_script("arguments[0].click();", click_element)
+		except:
+			ss_name_sixth_1 =  'whatsapp error ' + frappe.session.user + 'sixth_1' + frappe.generate_hash(length=5) +  '.png'
+			# f_sixth = save_file(ss_name_sixth_1, '', '','')
+			driver.save_screenshot(frappe.get_site_path('public','files') + '/'+ ss_name_sixth_1)
+			error_log_sixth_1 = frappe.log_error(frappe.get_traceback(),"Error while trying to send the media file in whatsapp in {} : {}".format(doctype,name))
+			f_sixth_1 = frappe.new_doc("File")
+			f_sixth_1.file_url = "/files/"+ss_name_sixth_1
+			f_sixth_1.attached_to_doctype = 'Error Log'
+			f_sixth_1.attached_to_name = error_log_sixth_1.name
+			f_sixth_1.flags.ignore_permissions = True
+			f_sixth_1.insert()
+			frappe.db.commit()
+			driver.quit()
+			return False
+
+		
 
 	if attach_list:
 		try:
@@ -546,15 +568,31 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 					return False
 				try:
 					WebDriverWait(driver,60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'span[data-icon="clip"]')))
+					click_element_span = driver.find_element_by_css_selector('span[data-icon="clip')
+					driver.execute_script("arguments[0].click();", click_element_span)
+					# driver.find_element_by_css_selector('span[data-icon="clip"]').click()
+					attach=driver.find_element_by_css_selector('input[type="file"]')
+					attach.send_keys(path_url)
 				except:
-					frappe.log_error(frappe.get_traceback(),"Unable to send the whatsapp message")
+					ss_name_seven_1 =  'whatsapp error ' + frappe.session.user + 'seven' + frappe.generate_hash(length=5) +'.png'
+					# f_seven_1 = save_file(ss_name_seven_1, '', '','')
+					driver.save_screenshot(frappe.get_site_path('public','files') + '/'+ ss_name_seven_1)
+					error_log_seven = frappe.log_error(frappe.get_traceback(),"Unable to send the whatsapp message in {} : {}".format(doctype,name))
+					f_seven_1 = frappe.new_doc("File")
+					f_seven_1.file_url = "/files/"+ss_name_seven_1
+					f_seven_1.attached_to_doctype = 'Error Log'
+					f_seven_1.attached_to_name = error_log_seven.name
+					f_seven_1.flags.ignore_permissions = True
+					f_seven_1.insert()
+					frappe.db.commit()
 					driver.quit()
-					return False					
-				driver.find_element_by_css_selector('span[data-icon="clip"]').click()
-				attach=driver.find_element_by_css_selector('input[type="file"]')
-				attach.send_keys(path_url)
+					return False
+
 				try:
-					WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '._33pCO')))
+					WebDriverWait(driver,60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '._33pCO')))
+					click_element_file = driver.find_element_by_css_selector('._33pCO')
+					driver.execute_script("arguments[0].click();", click_element_file)
+					# WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '._33pCO')))
 					# WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div')))
 				except:
 					ss_name_eight =  'whatsapp error ' + frappe.session.user + 'eight' + frappe.generate_hash(length=5) +  '.png'
@@ -571,7 +609,7 @@ def send_media_whatsapp(mobile_number,description,selected_attachments,doctype,n
 					driver.quit()
 					return False
 
-				driver.find_element_by_css_selector('._33pCO').click()
+				# driver.find_element_by_css_selector('._33pCO').click()
 				# whatsapp_send_button = driver.find_element_by_xpath('//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/span/div/div')
 				# whatsapp_send_button.click()
 	
